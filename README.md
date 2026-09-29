@@ -105,7 +105,7 @@ Temperature → Verwijderen** en de-installeer hem daarna in HACS.
 
 ## Development
 
-Releases: push a tag like `v0.1.0`. The release workflow sets the manifest version, builds
+Releases use CalVer (`YYYY.M.N`): push a tag like `2026.9.1`. The release workflow sets the manifest version, builds
 `rws_watertemperature.zip` and publishes a GitHub release that HACS installs from.
 
 
