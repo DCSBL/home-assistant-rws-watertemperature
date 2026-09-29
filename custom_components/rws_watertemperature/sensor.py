@@ -20,26 +20,21 @@ from homeassistant.const import (
     UnitOfTemperature,
 )
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.util import dt as dt_util
 
 from .api import RwsObservation
 from .const import (
-    ATTRIBUTION,
     CONF_LOCATIONS,
-    DOMAIN,
     LAST_MEASUREMENT_KEY,
-    LOC_CODE,
     LOC_LATITUDE,
     LOC_LONGITUDE,
-    LOC_NAME,
     MAX_READING_AGE,
     QUANTITY_TEMPERATURE,
     QUANTITY_WATER_LEVEL,
 )
 from .coordinator import RwsConfigEntry, RwsCoordinator
+from .entity import RwsEntity
 
 # Coordinator-based entities: updates are centralised, no per-entity limit needed.
 PARALLEL_UPDATES = 0
@@ -103,11 +98,9 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class RwsEntity(CoordinatorEntity[RwsCoordinator], SensorEntity):
-    """Base entity for one quantity at one RWS location."""
+class RwsSensor(RwsEntity, SensorEntity):
+    """Base sensor for one quantity at one RWS location."""
 
-    _attr_attribution = ATTRIBUTION
-    _attr_has_entity_name = True
     entity_description: RwsSensorEntityDescription
 
     def __init__(
@@ -116,32 +109,17 @@ class RwsEntity(CoordinatorEntity[RwsCoordinator], SensorEntity):
         location: dict[str, Any],
         description: RwsSensorEntityDescription,
     ) -> None:
-        """Initialize the entity."""
-        super().__init__(coordinator)
+        """Initialize the sensor."""
+        super().__init__(coordinator, location, description.key)
         self.entity_description = description
-        self._code: str = location[LOC_CODE]
-        self._location = location
-        self._attr_unique_id = f"{self._code}_{description.key}"
-        self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, self._code)},
-            name=location[LOC_NAME],
-            manufacturer="Rijkswaterstaat",
-            model=self._code,
-            entry_type=DeviceEntryType.SERVICE,
-            configuration_url="https://waterinfo.rws.nl/",
-        )
 
     @property
     def observation(self) -> RwsObservation | None:
-        """Latest observation for this entity's quantity and location."""
-        return (
-            (self.coordinator.data or {})
-            .get(self.entity_description.quantity, {})
-            .get(self._code)
-        )
+        """Latest observation for this sensor's quantity and location."""
+        return self._observation(self.entity_description.quantity)
 
 
-class RwsMeasurementSensor(RwsEntity):
+class RwsMeasurementSensor(RwsSensor):
     """The latest measured value; unavailable when the reading is stale."""
 
     @property
@@ -171,7 +149,7 @@ class RwsMeasurementSensor(RwsEntity):
         }
 
 
-class RwsLastMeasurementSensor(RwsEntity):
+class RwsLastMeasurementSensor(RwsSensor):
     """When RWS last measured water temperature at this location (even if stale)."""
 
     @property

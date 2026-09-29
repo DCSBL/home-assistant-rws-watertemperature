@@ -1,0 +1,15 @@
+{
+  "entity": {
+    "sensor": {
+      "water_temperature": {
+        "default": "mdi:coolant-temperature"
+      },
+      "water_level": {
+        "default": "mdi:waves-arrow-up"
+      },
+      "last_measurement": {
+        "default": "mdi:clock-outline"
+      }
+    }
+  }
+}
