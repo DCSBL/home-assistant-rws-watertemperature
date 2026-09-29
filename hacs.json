@@ -1,7 +1,7 @@
 {
   "name": "Rijkswaterstaat Water Temperature",
   "homeassistant": "2025.3.0",
-  "render_readme": true,
+  "country": "NL",
   "zip_release": true,
   "filename": "rws_watertemperature.zip"
 }
