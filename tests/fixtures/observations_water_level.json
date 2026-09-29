@@ -1,0 +1,12 @@
+{
+  "Succesvol": true,
+  "WaarnemingenLijst": [
+    {
+      "Locatie": {"Locatie_MessageID": 101, "Code": "maarssen.kanaal", "Naam": "Maarssen kanaal", "Lat": 52.137, "Lon": 5.030},
+      "AquoMetadata": {"Compartiment": {"Code": "OW"}, "Grootheid": {"Code": "WATHTE"}, "Eenheid": {"Code": "cm"}},
+      "MetingenLijst": [
+        {"Tijdstip": "2026-09-29T12:50:00.000+01:00", "Meetwaarde": {"Waarde_Numeriek": -40.0}}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "Succesvol": true,
+  "WaarnemingenLijst": [
+    {
+      "Locatie": {"Locatie_MessageID": 101, "Code": "maarssen.kanaal", "Naam": "Maarssen kanaal", "Lat": 52.137, "Lon": 5.030},
+      "AquoMetadata": {"Compartiment": {"Code": "OW"}, "Grootheid": {"Code": "T"}, "Eenheid": {"Code": "oC"}},
+      "MetingenLijst": [
+        {"Tijdstip": "2026-09-29T11:00:00.000+01:00", "Meetwaarde": {"Waarde_Numeriek": 16.4}},
+        {"Tijdstip": "2026-09-29T12:50:00.000+01:00", "Meetwaarde": {"Waarde_Numeriek": 16.8}},
+        {"Tijdstip": "2026-09-29T12:40:00.000+01:00", "Meetwaarde": {"Waarde_Numeriek": 16.7}}
+      ]
+    },
+    {
+      "Locatie": {"Locatie_MessageID": 102, "Code": "lobith", "Naam": "Lobith", "Lat": 51.855, "Lon": 6.106},
+      "AquoMetadata": {"Compartiment": {"Code": "OW"}, "Grootheid": {"Code": "T"}, "Eenheid": {"Code": "oC"}},
+      "MetingenLijst": [
+        {"Tijdstip": "2026-09-25T10:00:00.000+01:00", "Meetwaarde": {"Waarde_Numeriek": 17.9}},
+        {"Tijdstip": "2026-09-25T10:10:00.000+01:00", "Meetwaarde": {"Waarde_Numeriek": 999999999}}
+      ]
+    },
+    {
+      "Locatie": {"Locatie_MessageID": 103, "Code": "oud.zwemwater", "Naam": "Oud zwemwater", "Lat": 52.100, "Lon": 5.100},
+      "AquoMetadata": {"Compartiment": {"Code": "OW"}, "Grootheid": {"Code": "T"}, "Eenheid": {"Code": "oC"}},
+      "MetingenLijst": [
+        {"Tijdstip": "2015-08-01T10:00:00.000+01:00", "Meetwaarde": {"Waarde_Numeriek": 21.0}}
+      ]
+    }
+  ]
+}

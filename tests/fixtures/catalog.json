@@ -1,0 +1,25 @@
+{
+  "Succesvol": true,
+  "AquoMetadataLijst": [
+    {"AquoMetadata_MessageID": 1, "Compartiment": {"Code": "OW", "Omschrijving": "Oppervlaktewater"}, "Grootheid": {"Code": "T", "Omschrijving": "Temperatuur"}, "Eenheid": {"Code": "oC"}},
+    {"AquoMetadata_MessageID": 2, "Compartiment": {"Code": "OW", "Omschrijving": "Oppervlaktewater"}, "Grootheid": {"Code": "WATHTE", "Omschrijving": "Waterhoogte"}, "Eenheid": {"Code": "cm"}},
+    {"AquoMetadata_MessageID": 3, "Compartiment": {"Code": "LT", "Omschrijving": "Lucht"}, "Grootheid": {"Code": "T", "Omschrijving": "Temperatuur"}, "Eenheid": {"Code": "oC"}}
+  ],
+  "AquoMetadataLocatieLijst": [
+    {"AquoMetaData_MessageID": 1, "Locatie_MessageID": 101},
+    {"AquoMetaData_MessageID": 2, "Locatie_MessageID": 101},
+    {"AquoMetaData_MessageID": 1, "Locatie_MessageID": 102},
+    {"AquoMetaData_MessageID": 1, "Locatie_MessageID": 103},
+    {"AquoMetaData_MessageID": 1, "Locatie_MessageID": 104},
+    {"AquoMetaData_MessageID": 3, "Locatie_MessageID": 105},
+    {"AquoMetaData_MessageID": 2, "Locatie_MessageID": 106}
+  ],
+  "LocatieLijst": [
+    {"Locatie_MessageID": 101, "Code": "maarssen.kanaal", "Naam": "Maarssen kanaal", "Coordinatenstelsel": "25831", "Lat": 52.137, "Lon": 5.030},
+    {"Locatie_MessageID": 102, "Code": "lobith", "Naam": "Lobith", "Coordinatenstelsel": "25831", "Lat": 51.855, "Lon": 6.106},
+    {"Locatie_MessageID": 103, "Code": "oud.zwemwater", "Naam": "Oud zwemwater", "Coordinatenstelsel": "25831", "Lat": 52.100, "Lon": 5.100},
+    {"Locatie_MessageID": 104, "Code": "geen.data", "Naam": "Geen data", "Coordinatenstelsel": "25831", "Lat": 52.200, "Lon": 5.200},
+    {"Locatie_MessageID": 105, "Code": "luchtmeetpunt", "Naam": "Luchtmeetpunt", "Coordinatenstelsel": "25831", "Lat": 52.090, "Lon": 5.120},
+    {"Locatie_MessageID": 106, "Code": "alleen.waterstand", "Naam": "Alleen waterstand", "Coordinatenstelsel": "25831", "Lat": 52.080, "Lon": 5.110}
+  ]
+}
