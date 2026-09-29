@@ -3,6 +3,11 @@ name: Release
 on:
   push:
     tags: ["[0-9]*.[0-9]*.[0-9]*", "v*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "CalVer version to release, e.g. 2026.9.1 (the tag is created on the selected branch)"
+        required: true
 
 permissions:
   contents: write
@@ -10,12 +15,14 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.version || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set manifest version from tag
+      - name: Set manifest version
         run: |
-          version="${GITHUB_REF_NAME#v}"
+          version="${VERSION#v}"
           jq --arg v "$version" '.version = $v' \
             custom_components/rws_watertemperature/manifest.json > manifest.tmp
           mv manifest.tmp custom_components/rws_watertemperature/manifest.json
@@ -26,5 +33,8 @@ jobs:
 
       - uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.VERSION }}
+          name: ${{ env.VERSION }}
+          target_commitish: ${{ github.sha }}
           files: rws_watertemperature.zip
           generate_release_notes: true
