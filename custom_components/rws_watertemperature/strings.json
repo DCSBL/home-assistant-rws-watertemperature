@@ -1,0 +1,79 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Select measuring locations",
+        "description": "Rijkswaterstaat locations near your home that reported a water temperature in the last 90 days, nearest first.",
+        "data": {
+          "locations": "Locations",
+          "quantities": "Extra measurements"
+        },
+        "data_description": {
+          "locations": "Each location becomes a device with a water temperature sensor.",
+          "quantities": "Optional extra measurements to add for each location, when RWS publishes them there."
+        }
+      }
+    },
+    "error": {
+      "no_locations_selected": "Select at least one location."
+    },
+    "abort": {
+      "already_configured": "Rijkswaterstaat is already configured. Use the options to change locations.",
+      "cannot_connect": "Could not reach the Rijkswaterstaat API.",
+      "no_stations": "No Rijkswaterstaat location near your home reported a water temperature in the last 90 days."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Select measuring locations",
+        "description": "Rijkswaterstaat locations near your home that reported a water temperature in the last 90 days, nearest first.",
+        "data": {
+          "locations": "Locations",
+          "quantities": "Extra measurements"
+        },
+        "data_description": {
+          "locations": "Each location becomes a device with a water temperature sensor.",
+          "quantities": "Optional extra measurements to add for each location, when RWS publishes them there."
+        }
+      }
+    },
+    "error": {
+      "no_locations_selected": "Select at least one location."
+    },
+    "abort": {
+      "cannot_connect": "Could not reach the Rijkswaterstaat API."
+    }
+  },
+  "selector": {
+    "quantities": {
+      "options": {
+        "water_level": "Water level"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "water_temperature": {
+        "name": "Water temperature",
+        "state_attributes": {
+          "observed_at": { "name": "Observed at" }
+        }
+      },
+      "water_level": {
+        "name": "Water level",
+        "state_attributes": {
+          "observed_at": { "name": "Observed at" }
+        }
+      },
+      "last_measurement": {
+        "name": "Last measurement"
+      }
+    }
+  },
+  "exceptions": {
+    "update_failed": {
+      "message": "Error fetching data from Rijkswaterstaat: {error}"
+    }
+  }
+}

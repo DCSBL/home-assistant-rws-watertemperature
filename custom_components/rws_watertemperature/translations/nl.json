@@ -1,0 +1,79 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Kies meetlocaties",
+        "description": "Rijkswaterstaat-meetlocaties bij je huis die de afgelopen 90 dagen een watertemperatuur hebben gemeten, dichtstbijzijnde eerst.",
+        "data": {
+          "locations": "Locaties",
+          "quantities": "Extra metingen"
+        },
+        "data_description": {
+          "locations": "Elke locatie wordt een apparaat met een watertemperatuursensor.",
+          "quantities": "Optionele extra metingen per locatie, als RWS die daar publiceert."
+        }
+      }
+    },
+    "error": {
+      "no_locations_selected": "Kies minstens één locatie."
+    },
+    "abort": {
+      "already_configured": "Rijkswaterstaat is al ingesteld. Wijzig de locaties via de opties.",
+      "cannot_connect": "Kan de Rijkswaterstaat-API niet bereiken.",
+      "no_stations": "Geen Rijkswaterstaat-meetlocatie bij je huis heeft de afgelopen 90 dagen een watertemperatuur gemeten."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Kies meetlocaties",
+        "description": "Rijkswaterstaat-meetlocaties bij je huis die de afgelopen 90 dagen een watertemperatuur hebben gemeten, dichtstbijzijnde eerst.",
+        "data": {
+          "locations": "Locaties",
+          "quantities": "Extra metingen"
+        },
+        "data_description": {
+          "locations": "Elke locatie wordt een apparaat met een watertemperatuursensor.",
+          "quantities": "Optionele extra metingen per locatie, als RWS die daar publiceert."
+        }
+      }
+    },
+    "error": {
+      "no_locations_selected": "Kies minstens één locatie."
+    },
+    "abort": {
+      "cannot_connect": "Kan de Rijkswaterstaat-API niet bereiken."
+    }
+  },
+  "selector": {
+    "quantities": {
+      "options": {
+        "water_level": "Waterstand"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "water_temperature": {
+        "name": "Watertemperatuur",
+        "state_attributes": {
+          "observed_at": { "name": "Gemeten op" }
+        }
+      },
+      "water_level": {
+        "name": "Waterstand",
+        "state_attributes": {
+          "observed_at": { "name": "Gemeten op" }
+        }
+      },
+      "last_measurement": {
+        "name": "Laatst bijgewerkt"
+      }
+    }
+  },
+  "exceptions": {
+    "update_failed": {
+      "message": "Fout bij ophalen van gegevens van Rijkswaterstaat: {error}"
+    }
+  }
+}

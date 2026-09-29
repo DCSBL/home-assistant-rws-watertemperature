@@ -1,0 +1,13 @@
+{
+  "domain": "rws_watertemperature",
+  "name": "Rijkswaterstaat Water Temperature",
+  "codeowners": ["@dcsbl"],
+  "config_flow": true,
+  "documentation": "https://github.com/dcsbl/home-assistant-rws-watertemperature",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/dcsbl/home-assistant-rws-watertemperature/issues",
+  "requirements": [],
+  "single_config_entry": true,
+  "version": "0.1.0"
+}
