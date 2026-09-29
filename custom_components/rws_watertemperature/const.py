@@ -16,6 +16,9 @@ OBSERVATIONS_URL: Final = (
     "ONLINEWAARNEMINGENSERVICES/OphalenLaatsteWaarnemingen"
 )
 
+# PDOK Locatieserver (Kadaster): free geocoder for Dutch place names, no API key.
+GEOCODE_URL: Final = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/free"
+
 CONF_LOCATIONS: Final = "locations"
 CONF_QUANTITIES: Final = "quantities"
 
@@ -34,7 +37,8 @@ MAX_READING_AGE: Final = timedelta(hours=48)
 # "zwemwater" stations stopped reporting years ago.
 MAX_STATION_AGE: Final = timedelta(days=90)
 
-# How many of the nearest stations the config flow checks for recent readings.
+# How many of the nearest (or best name matching) stations the config flow checks for
+# recent readings and offers.
 NEARBY_CANDIDATES: Final = 30
 
 

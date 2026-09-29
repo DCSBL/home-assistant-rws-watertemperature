@@ -6,7 +6,7 @@
 
 A [HACS](https://hacs.xyz) custom integration that shows the latest surface water
 temperature measured by [Rijkswaterstaat](https://waterinfo.rws.nl/) (RWS) at
-measuring locations near your home. Optionally, it also shows the water level at the
+measuring locations of your choice. Optionally, it also shows the water level at the
 same locations.
 
 Data comes from the public RWS WaterWebservices API. No account or API key is needed.
@@ -22,13 +22,24 @@ Data: Rijkswaterstaat (CC0).
 
 ### Configuration
 
-The setup lists the 30 RWS locations nearest to your home location (**Settings →
-System → General**). It only shows the ones that reported a water temperature in the
-last 90 days, sorted by distance, for example `Maarssen kanaal (8.1 km)`. Many RWS
-"zwemwater" stations stopped reporting years ago, so they are left out.
+You can pick any Rijkswaterstaat location, not just the ones near your home. The setup
+asks how to look for locations:
+
+- **Search by name**: type (part of) a location name, for example `Lobith`. If no
+  location has that name, it is looked up as a place in the Netherlands (town,
+  neighbourhood, lake...) with the free [PDOK Locatieserver](https://api.pdok.nl), and the
+  RWS locations nearest to it are offered. So `Nesselande` finds the best measuring
+  location near Nesselande, even though there is no sensor in the lake itself.
+- **Search around a point on the map**: pick coordinates; the nearest locations are
+  offered.
+
+Only locations that reported a water temperature in the last 90 days are offered (many
+RWS "zwemwater" stations stopped reporting years ago), sorted by distance, for example
+`Maarssen kanaal (8.1 km)`. The nearest one is preselected.
 
 Pick one or more locations, and optionally tick **Water level** to add a water level
-sensor too. To change your selection later, use **Configure** on the integration.
+sensor too. To add, change or remove locations later, use **Configure** on the
+integration: search again (your current selection is kept) or only edit the selection.
 Sensors for locations you deselect are removed.
 
 ### Entities
@@ -56,7 +67,7 @@ Temperature → Delete**, then uninstall it in HACS.
 ## Nederlands
 
 Een [HACS](https://hacs.xyz)-integratie die de laatst gemeten oppervlaktewatertemperatuur
-van [Rijkswaterstaat](https://waterinfo.rws.nl/) (RWS) toont voor meetlocaties bij je huis.
+van [Rijkswaterstaat](https://waterinfo.rws.nl/) (RWS) toont voor meetlocaties naar keuze.
 Optioneel toont hij ook de waterstand op dezelfde locaties.
 
 De gegevens komen uit de openbare RWS WaterWebservices-API. Een account of API-sleutel is
@@ -72,15 +83,25 @@ niet nodig. Data: Rijkswaterstaat (CC0).
 
 ### Instellen
 
-De installatie zoekt de 30 RWS-meetlocaties die het dichtst bij je thuislocatie liggen
-(**Instellingen → Systeem → Algemeen**). Alleen locaties die de afgelopen 90 dagen een
-watertemperatuur hebben gemeten worden getoond, op afstand gesorteerd, bijvoorbeeld
-`Maarssen kanaal (8.1 km)`. Veel RWS-zwemwaterlocaties meten al jaren niet meer en vallen
-daarom weg.
+Je kunt elke Rijkswaterstaat-locatie kiezen, niet alleen die bij je huis. De installatie
+vraagt hoe je locaties wilt zoeken:
+
+- **Zoeken op naam**: typ (een deel van) een locatienaam, bijvoorbeeld `Lobith`. Heeft
+  geen locatie die naam, dan wordt hij opgezocht als plaats in Nederland (dorp, wijk,
+  plas...) via de gratis [PDOK Locatieserver](https://api.pdok.nl) en worden de
+  dichtstbijzijnde RWS-locaties getoond. Met `Nesselande` vind je dus de beste meetlocatie
+  bij Nesselande, ook al zit er geen sensor in de plas zelf.
+- **Zoeken rond een punt op de kaart**: kies coördinaten; de dichtstbijzijnde locaties
+  worden getoond.
+
+Alleen locaties die de afgelopen 90 dagen een watertemperatuur hebben gemeten worden
+getoond (veel RWS-zwemwaterlocaties meten al jaren niet meer), op afstand gesorteerd,
+bijvoorbeeld `Maarssen kanaal (8.1 km)`. De dichtstbijzijnde is vooraf geselecteerd.
 
 Kies een of meer locaties en vink eventueel **Waterstand** aan voor een extra
-waterstandsensor. Je keuze wijzig je later via **Configureren** bij de integratie.
-Sensoren van locaties die je uitvinkt worden verwijderd.
+waterstandsensor. Locaties toevoegen, wijzigen of verwijderen doe je later via
+**Configureren** bij de integratie: zoek opnieuw (je huidige selectie blijft behouden) of
+pas alleen de selectie aan. Sensoren van locaties die je uitvinkt worden verwijderd.
 
 ### Entiteiten
 
