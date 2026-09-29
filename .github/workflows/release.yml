@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set manifest version from tag
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          jq --arg v "$version" '.version = $v' \
+            custom_components/rws_watertemperature/manifest.json > manifest.tmp
+          mv manifest.tmp custom_components/rws_watertemperature/manifest.json
+
+      - name: Zip integration
+        working-directory: custom_components/rws_watertemperature
+        run: zip -r "$GITHUB_WORKSPACE/rws_watertemperature.zip" . -x '__pycache__/*'
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: rws_watertemperature.zip
+          generate_release_notes: true
