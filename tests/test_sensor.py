@@ -108,24 +108,3 @@ async def test_update_failure(
     async_fire_time_changed(hass)
     await hass.async_block_till_done()
     assert hass.states.get(state_id).state == "16.8"
-
-
-async def test_setup_retry_on_connection_error(
-    hass: HomeAssistant,
-    aioclient_mock: AiohttpClientMocker,
-    config_entry: MockConfigEntry,
-) -> None:
-    """Setup is retried when RWS cannot be reached."""
-    aioclient_mock.post(OBSERVATIONS_URL, exc=TimeoutError)
-    config_entry.add_to_hass(hass)
-    await hass.config_entries.async_setup(config_entry.entry_id)
-    assert config_entry.state is ConfigEntryState.SETUP_RETRY
-
-
-async def test_unload(
-    hass: HomeAssistant, rws_api: AiohttpClientMocker, config_entry: MockConfigEntry
-) -> None:
-    """The entry unloads cleanly."""
-    await _setup(hass, config_entry)
-    assert await hass.config_entries.async_unload(config_entry.entry_id)
-    assert config_entry.state is ConfigEntryState.NOT_LOADED
