@@ -2,8 +2,33 @@
   "config": {
     "step": {
       "user": {
+        "title": "Zoek meetlocaties",
+        "description": "Zoek Rijkswaterstaat-locaties op naam, of rond een punt op de kaart. Ook een plek zonder sensor (een plas, een wijk) werkt: dan worden de dichtstbijzijnde locaties getoond.",
+        "menu_options": {
+          "search_name": "Zoeken op naam",
+          "search_location": "Zoeken rond een punt op de kaart"
+        }
+      },
+      "search_name": {
+        "title": "Zoeken op naam",
+        "description": "Vul de naam van een Rijkswaterstaat-locatie in. Heeft geen locatie die naam, dan wordt hij opgezocht als plaats in Nederland (dorp, wijk, plas...) en worden de dichtstbijzijnde locaties getoond.",
+        "data": {
+          "query": "Naam"
+        },
+        "data_description": {
+          "query": "Bijvoorbeeld Lobith, Maarssen of Nesselande."
+        }
+      },
+      "search_location": {
+        "title": "Zoeken rond een punt",
+        "description": "Kies een punt op de kaart. De dichtstbijzijnde locaties die de afgelopen 90 dagen een watertemperatuur hebben gemeten worden getoond.",
+        "data": {
+          "location": "Punt"
+        }
+      },
+      "select": {
         "title": "Kies meetlocaties",
-        "description": "Rijkswaterstaat-meetlocaties bij je huis die de afgelopen 90 dagen een watertemperatuur hebben gemeten, dichtstbijzijnde eerst.",
+        "description": "Locaties die de afgelopen 90 dagen een watertemperatuur hebben gemeten, dichtstbijzijnde bij {search} eerst.",
         "data": {
           "locations": "Locaties",
           "quantities": "Extra metingen"
@@ -15,19 +40,46 @@
       }
     },
     "error": {
-      "no_locations_selected": "Kies minstens één locatie."
+      "no_locations_selected": "Kies minstens één locatie.",
+      "place_not_found": "Die plaats is niet gevonden. Probeer een andere naam of zoek rond een punt op de kaart.",
+      "no_stations": "Geen locatie in de buurt heeft de afgelopen 90 dagen een watertemperatuur gemeten."
     },
     "abort": {
-      "already_configured": "Rijkswaterstaat is al ingesteld. Wijzig de locaties via de opties.",
       "cannot_connect": "Kan de Rijkswaterstaat-API niet bereiken.",
-      "no_stations": "Geen Rijkswaterstaat-meetlocatie bij je huis heeft de afgelopen 90 dagen een watertemperatuur gemeten."
+      "already_configured": "Rijkswaterstaat is al ingesteld. Wijzig de locaties via de opties."
     }
   },
   "options": {
     "step": {
       "init": {
+        "title": "Zoek meetlocaties",
+        "description": "Zoek Rijkswaterstaat-locaties op naam, of rond een punt op de kaart. Ook een plek zonder sensor (een plas, een wijk) werkt: dan worden de dichtstbijzijnde locaties getoond.",
+        "menu_options": {
+          "search_name": "Zoeken op naam",
+          "search_location": "Zoeken rond een punt op de kaart",
+          "keep": "Alleen de huidige selectie aanpassen"
+        }
+      },
+      "search_name": {
+        "title": "Zoeken op naam",
+        "description": "Vul de naam van een Rijkswaterstaat-locatie in. Heeft geen locatie die naam, dan wordt hij opgezocht als plaats in Nederland (dorp, wijk, plas...) en worden de dichtstbijzijnde locaties getoond.",
+        "data": {
+          "query": "Naam"
+        },
+        "data_description": {
+          "query": "Bijvoorbeeld Lobith, Maarssen of Nesselande."
+        }
+      },
+      "search_location": {
+        "title": "Zoeken rond een punt",
+        "description": "Kies een punt op de kaart. De dichtstbijzijnde locaties die de afgelopen 90 dagen een watertemperatuur hebben gemeten worden getoond.",
+        "data": {
+          "location": "Punt"
+        }
+      },
+      "select": {
         "title": "Kies meetlocaties",
-        "description": "Rijkswaterstaat-meetlocaties bij je huis die de afgelopen 90 dagen een watertemperatuur hebben gemeten, dichtstbijzijnde eerst.",
+        "description": "Locaties die de afgelopen 90 dagen een watertemperatuur hebben gemeten, dichtstbijzijnde bij {search} eerst.",
         "data": {
           "locations": "Locaties",
           "quantities": "Extra metingen"
@@ -39,7 +91,9 @@
       }
     },
     "error": {
-      "no_locations_selected": "Kies minstens één locatie."
+      "no_locations_selected": "Kies minstens één locatie.",
+      "place_not_found": "Die plaats is niet gevonden. Probeer een andere naam of zoek rond een punt op de kaart.",
+      "no_stations": "Geen locatie in de buurt heeft de afgelopen 90 dagen een watertemperatuur gemeten."
     },
     "abort": {
       "cannot_connect": "Kan de Rijkswaterstaat-API niet bereiken."
@@ -57,13 +111,17 @@
       "water_temperature": {
         "name": "Watertemperatuur",
         "state_attributes": {
-          "observed_at": { "name": "Gemeten op" }
+          "observed_at": {
+            "name": "Gemeten op"
+          }
         }
       },
       "water_level": {
         "name": "Waterstand",
         "state_attributes": {
-          "observed_at": { "name": "Gemeten op" }
+          "observed_at": {
+            "name": "Gemeten op"
+          }
         }
       },
       "last_measurement": {

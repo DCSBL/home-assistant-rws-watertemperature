@@ -2,8 +2,33 @@
   "config": {
     "step": {
       "user": {
+        "title": "Find measuring locations",
+        "description": "Look for Rijkswaterstaat locations by name, or around a point on the map. A place without a sensor (a lake, a neighbourhood) works too: the nearest locations are offered.",
+        "menu_options": {
+          "search_name": "Search by name",
+          "search_location": "Search around a point on the map"
+        }
+      },
+      "search_name": {
+        "title": "Search by name",
+        "description": "Enter the name of a Rijkswaterstaat location. If no location has that name, it is looked up as a place in the Netherlands (town, neighbourhood, lake...) and the nearest locations are offered.",
+        "data": {
+          "query": "Name"
+        },
+        "data_description": {
+          "query": "For example Lobith, Maarssen or Nesselande."
+        }
+      },
+      "search_location": {
+        "title": "Search around a point",
+        "description": "Pick a point on the map. The nearest locations that reported a water temperature in the last 90 days are offered.",
+        "data": {
+          "location": "Point"
+        }
+      },
+      "select": {
         "title": "Select measuring locations",
-        "description": "Rijkswaterstaat locations near your home that reported a water temperature in the last 90 days, nearest first.",
+        "description": "Locations that reported a water temperature in the last 90 days, nearest to {search} first.",
         "data": {
           "locations": "Locations",
           "quantities": "Extra measurements"
@@ -15,19 +40,46 @@
       }
     },
     "error": {
-      "no_locations_selected": "Select at least one location."
+      "no_locations_selected": "Select at least one location.",
+      "place_not_found": "Could not find that place. Try another name or search around a point on the map.",
+      "no_stations": "No location near there reported a water temperature in the last 90 days."
     },
     "abort": {
-      "already_configured": "Rijkswaterstaat is already configured. Use the options to change locations.",
       "cannot_connect": "Could not reach the Rijkswaterstaat API.",
-      "no_stations": "No Rijkswaterstaat location near your home reported a water temperature in the last 90 days."
+      "already_configured": "Rijkswaterstaat is already configured. Use the options to change locations."
     }
   },
   "options": {
     "step": {
       "init": {
+        "title": "Find measuring locations",
+        "description": "Look for Rijkswaterstaat locations by name, or around a point on the map. A place without a sensor (a lake, a neighbourhood) works too: the nearest locations are offered.",
+        "menu_options": {
+          "search_name": "Search by name",
+          "search_location": "Search around a point on the map",
+          "keep": "Change the current selection only"
+        }
+      },
+      "search_name": {
+        "title": "Search by name",
+        "description": "Enter the name of a Rijkswaterstaat location. If no location has that name, it is looked up as a place in the Netherlands (town, neighbourhood, lake...) and the nearest locations are offered.",
+        "data": {
+          "query": "Name"
+        },
+        "data_description": {
+          "query": "For example Lobith, Maarssen or Nesselande."
+        }
+      },
+      "search_location": {
+        "title": "Search around a point",
+        "description": "Pick a point on the map. The nearest locations that reported a water temperature in the last 90 days are offered.",
+        "data": {
+          "location": "Point"
+        }
+      },
+      "select": {
         "title": "Select measuring locations",
-        "description": "Rijkswaterstaat locations near your home that reported a water temperature in the last 90 days, nearest first.",
+        "description": "Locations that reported a water temperature in the last 90 days, nearest to {search} first.",
         "data": {
           "locations": "Locations",
           "quantities": "Extra measurements"
@@ -39,7 +91,9 @@
       }
     },
     "error": {
-      "no_locations_selected": "Select at least one location."
+      "no_locations_selected": "Select at least one location.",
+      "place_not_found": "Could not find that place. Try another name or search around a point on the map.",
+      "no_stations": "No location near there reported a water temperature in the last 90 days."
     },
     "abort": {
       "cannot_connect": "Could not reach the Rijkswaterstaat API."
@@ -57,13 +111,17 @@
       "water_temperature": {
         "name": "Water temperature",
         "state_attributes": {
-          "observed_at": { "name": "Observed at" }
+          "observed_at": {
+            "name": "Observed at"
+          }
         }
       },
       "water_level": {
         "name": "Water level",
         "state_attributes": {
-          "observed_at": { "name": "Observed at" }
+          "observed_at": {
+            "name": "Observed at"
+          }
         }
       },
       "last_measurement": {

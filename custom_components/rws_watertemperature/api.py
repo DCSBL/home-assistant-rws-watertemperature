@@ -1,6 +1,7 @@
 """Client for the Rijkswaterstaat WaterWebservices (DDAPI20) API.
 
-No API key is needed. Two endpoints are used:
+No API key is needed. Two endpoints are used (plus the PDOK geocoder to resolve
+place names to coordinates):
 
 - ``OphalenCatalogus`` lists every measuring location and which Aquo quantities
   (Compartiment + Grootheid) it has a series for.
@@ -14,13 +15,15 @@ from dataclasses import dataclass
 from datetime import datetime
 import logging
 import math
+import re
 from typing import Any
+import unicodedata
 
 from aiohttp import ClientError, ClientSession, ClientTimeout
 
 from homeassistant.util import dt as dt_util
 
-from .const import CATALOG_URL, OBSERVATIONS_URL, Quantity
+from .const import CATALOG_URL, GEOCODE_URL, OBSERVATIONS_URL, Quantity
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -54,12 +57,31 @@ class RwsLocation:
 
 
 @dataclass(frozen=True, kw_only=True)
+class RwsPlace:
+    """A place resolved from a name by the geocoder."""
+
+    name: str
+    latitude: float
+    longitude: float
+
+
+@dataclass(frozen=True, kw_only=True)
 class RwsObservation:
     """The latest reading of one quantity at one location."""
 
     code: str
     value: float
     observed_at: datetime
+
+
+_POINT = re.compile(r"POINT\(\s*(-?[\d.]+)\s+(-?[\d.]+)\s*\)")
+
+
+def normalize_name(text: str) -> str:
+    """Lower-case, accent-less and punctuation-less form used to match names."""
+    decomposed = unicodedata.normalize("NFKD", text.casefold())
+    stripped = "".join(c for c in decomposed if not unicodedata.combining(c))
+    return re.sub(r"[\W_]+", " ", stripped).strip()
 
 
 def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -161,6 +183,37 @@ class RwsClient:
             )
             return {}
         return data
+
+    async def async_geocode(self, query: str) -> RwsPlace | None:
+        """Resolve a Dutch place name (town, district, street...) to coordinates."""
+        try:
+            async with self._session.get(
+                GEOCODE_URL,
+                params={"q": query, "rows": 1, "fl": "weergavenaam,centroide_ll"},
+                headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+                timeout=REQUEST_TIMEOUT,
+            ) as resp:
+                if resp.status >= 400:
+                    raise RwsApiError(f"HTTP {resp.status} from geocoder")
+                data = await resp.json(content_type=None)
+        except TimeoutError as err:
+            raise RwsConnectionError("Timeout talking to geocoder") from err
+        except ClientError as err:
+            raise RwsConnectionError(f"Error talking to geocoder: {err}") from err
+        except ValueError as err:
+            raise RwsApiError("Invalid JSON from geocoder") from err
+        try:
+            doc = data["response"]["docs"][0]
+            match = _POINT.fullmatch(doc["centroide_ll"])
+            if match is None:
+                return None
+            return RwsPlace(
+                name=doc.get("weergavenaam") or query,
+                longitude=float(match[1]),
+                latitude=float(match[2]),
+            )
+        except (KeyError, IndexError, TypeError):
+            return None
 
     async def async_get_catalog(self) -> dict[str, Any]:
         """Fetch the location/quantity catalog."""
